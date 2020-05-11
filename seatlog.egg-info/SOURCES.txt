@@ -1,0 +1,9 @@
+README.md
+setup.py
+seatlog/__init__.py
+seatlog/logger.py
+seatlog.egg-info/PKG-INFO
+seatlog.egg-info/SOURCES.txt
+seatlog.egg-info/dependency_links.txt
+seatlog.egg-info/requires.txt
+seatlog.egg-info/top_level.txt
