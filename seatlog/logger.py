@@ -4,7 +4,6 @@ import logging
 from pythonjsonlogger import jsonlogger
 from datetime import datetime
 
-
 class JsonFormatter(jsonlogger.JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
         super(JsonFormatter, self).add_fields(log_record, record, message_dict)
@@ -85,3 +84,16 @@ class Logger:
             extra = {**extra, **data}
 
         self.logger.warning(message, extra=extra)
+
+    def debug(self, message, correlation_id=None, data=None):
+        extra = {
+            "correlation_id": correlation_id,
+        }
+
+        if data:
+            extra = {**extra, **data}
+
+        self.logger.debug(message, extra=extra)    
+
+
+defaultLogger = Logger()
