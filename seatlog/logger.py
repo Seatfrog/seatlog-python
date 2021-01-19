@@ -94,6 +94,3 @@ class Logger:
             extra = {**extra, **data}
 
         self.logger.debug(message, extra=extra)    
-
-
-defaultLogger = Logger()
