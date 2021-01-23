@@ -1,8 +1,7 @@
-import os
-import json
 import logging
 from pythonjsonlogger import jsonlogger
 from datetime import datetime
+from collections import Mapping
 
 class JsonFormatter(jsonlogger.JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
@@ -57,7 +56,10 @@ class Logger:
         }
 
         if data:
-            extra = {**extra, **data}
+            if isinstance(data, Mapping):
+                extra = {**extra, **data}
+            else:
+                extra["invalid_extra_data"] = str(data)
 
         self.logger.info(message, extra=extra)
 
@@ -68,7 +70,10 @@ class Logger:
         }
 
         if data:
-            extra = {**extra, **data}
+            if isinstance(data, Mapping):
+                extra = {**extra, **data}
+            else:
+                extra["invalid_extra_data"] = str(data)
 
         self.logger.critical(message,
                              exc_info=exception,
@@ -81,7 +86,10 @@ class Logger:
         }
 
         if data:
-            extra = {**extra, **data}
+            if isinstance(data, Mapping):
+                extra = {**extra, **data}
+            else:
+                extra["invalid_extra_data"] = str(data)
 
         self.logger.warning(message, extra=extra)
 
@@ -91,6 +99,9 @@ class Logger:
         }
 
         if data:
-            extra = {**extra, **data}
+            if isinstance(data, Mapping):
+                extra = {**extra, **data}
+            else:
+                extra["invalid_extra_data"] = str(data)
 
-        self.logger.debug(message, extra=extra)    
+        self.logger.debug(message, extra=extra)
